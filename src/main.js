@@ -1,4 +1,4 @@
-`use strict`;
+'use strict';
 
 const FILM_COUNT = 5;
 const FILMS_EXTRA_BLOCK_COUNT = 2;
@@ -283,7 +283,7 @@ const filmsListContainerElement = filmsListElement.querySelector(`.films-list__c
 
 for (let i = 0; i < FILM_COUNT; i++) {
   render(filmsListContainerElement, createFilmCardTemplate(), `beforeend`);
-};
+}
 
 render(filmsListElement, createShowMoreButtonTemplate(), `beforeend`);
 render(filmsBlockElement, createFilmDetailsTemplate(), `beforeend`);
@@ -302,7 +302,7 @@ for (let i = 0; i < FILMS_EXTRA_BLOCK_COUNT; i++) {
 
   const filmsExtraFilmsContainer = filmsExtraBlock.querySelector(`.films-list__container`);
 
-  for (let i = 0; i < FILM_EXTRA_COUNT; i++) {
+  for (let j = 0; j < FILM_EXTRA_COUNT; j++) {
     render(filmsExtraFilmsContainer, createFilmCardTemplate(), `beforeend`);
-  };
-};
+  }
+}
