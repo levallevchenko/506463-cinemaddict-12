@@ -1,9 +1,7 @@
 'use strict';
 
 const FILM_COUNT = 5;
-const FILMS_EXTRA_BLOCK_COUNT = 2;
 const FILM_EXTRA_COUNT = 2;
-const filmsExtraHeaders = [`Top rated`, `Most commented`];
 
 const createProfileTemplate = () => {
   return (
@@ -252,10 +250,21 @@ const createFilmDetailsTemplate = () => {
   );
 };
 
-const createFilmListExtraTemplate = () => {
+const createTopRatedFilmsTemplate = () => {
   return (
     `<section class="films-list--extra">
-      <h2 class="films-list__title"></h2>
+      <h2 class="films-list__title">Top rated</h2>
+
+      <div class="films-list__container">
+      </div>
+    </section>`
+  );
+};
+
+const createMostCommentedFilmsTemplate = () => {
+  return (
+    `<section class="films-list--extra">
+      <h2 class="films-list__title">Most commented</h2>
 
       <div class="films-list__container">
       </div>
@@ -291,18 +300,15 @@ render(filmsBlockElement, createFilmDetailsTemplate(), `beforeend`);
 const filmsDetailsElement = filmsBlockElement.querySelector(`.film-details`);
 filmsDetailsElement.style.display = `none`;
 
-for (let i = 0; i < FILMS_EXTRA_BLOCK_COUNT; i++) {
-  render(filmsBlockElement, createFilmListExtraTemplate(), `beforeend`);
+render(filmsBlockElement, createTopRatedFilmsTemplate(), `beforeend`);
+render(filmsBlockElement, createMostCommentedFilmsTemplate(), `beforeend`);
 
-  const filmsExtraList = filmsBlockElement.querySelectorAll(`.films-list--extra`);
-  const filmsExtraBlock = filmsExtraList[i];
-  const filmsExtraTitle = filmsExtraBlock.querySelector(`.films-list__title`);
+const filmsExtraList = filmsBlockElement.querySelectorAll(`.films-list--extra`);
 
-  filmsExtraTitle.textContent = filmsExtraHeaders[i];
+filmsExtraList.forEach((filmsExtraBlock) => {
+  const filmsExtraContainer = filmsExtraBlock.querySelector(`.films-list__container`);
 
-  const filmsExtraFilmsContainer = filmsExtraBlock.querySelector(`.films-list__container`);
-
-  for (let j = 0; j < FILM_EXTRA_COUNT; j++) {
-    render(filmsExtraFilmsContainer, createFilmCardTemplate(), `beforeend`);
+  for (let i = 0; i < FILM_EXTRA_COUNT; i++) {
+    render(filmsExtraContainer, createFilmCardTemplate(), `beforeend`);
   }
-}
+});
