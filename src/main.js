@@ -1,8 +1,5 @@
-const FILM_COUNT = 5;
-const FILM_EXTRA_COUNT = 2;
-
 import {render} from "./util.js";
-import {createProfileTemplate} from "./view/profile.js";
+import {createUserRatingTemplate} from "./view/user-rating.js";
 import {createSiteMenuTemplate} from "./view/site-menu.js";
 import {createFilmsSortTemplate} from "./view/films-sort.js";
 import {createFilmsListTemplate} from "./view/films-list.js";
@@ -10,11 +7,15 @@ import {createFilmCardTemplate} from "./view/film-card.js";
 import {createShowMoreButtonTemplate} from "./view/show-more-button.js";
 import {createFilmDetailsTemplate} from "./view/film-details.js";
 import {createTopRatedFilmsTemplate} from "./view/top-rated-films.js";
-import {createMostCommentedFilmsTemplate} from "./view/most-commented-films";
+import {createMostCommentedFilmsTemplate} from "./view/most-commented-films.js";
+import {createStatisticsTemplate} from "./view/statistics.js";
+
+const FILM_COUNT = 5;
+const FILM_EXTRA_COUNT = 2;
 
 const siteHeaderElement = document.querySelector(`.header`);
 
-render(siteHeaderElement, createProfileTemplate(), `beforeend`);
+render(siteHeaderElement, createUserRatingTemplate(), `beforeend`);
 
 const siteMainElement = document.querySelector(`.main`);
 
@@ -39,12 +40,17 @@ filmsDetailsElement.style.display = `none`;
 render(filmsBlockElement, createTopRatedFilmsTemplate(), `beforeend`);
 render(filmsBlockElement, createMostCommentedFilmsTemplate(), `beforeend`);
 
-const filmsExtraList = filmsBlockElement.querySelectorAll(`.films-list--extra`);
+const filmsExtraListElement = filmsBlockElement.querySelectorAll(`.films-list--extra`);
 
-filmsExtraList.forEach((filmsExtraBlock) => {
-  const filmsExtraContainer = filmsExtraBlock.querySelector(`.films-list__container`);
+filmsExtraListElement.forEach((filmsExtraBlockElement) => {
+  const filmsExtraContainerElement = filmsExtraBlockElement.querySelector(`.films-list__container`);
 
   for (let i = 0; i < FILM_EXTRA_COUNT; i++) {
-    render(filmsExtraContainer, createFilmCardTemplate(), `beforeend`);
+    render(filmsExtraContainerElement, createFilmCardTemplate(), `beforeend`);
   }
 });
+
+const siteFooterElement = document.querySelector(`.footer`);
+const filmsStatisticsElement = siteFooterElement.querySelector('.footer__statistics');
+
+render(filmsStatisticsElement, createStatisticsTemplate(), `beforeend`);
