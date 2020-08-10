@@ -49,7 +49,7 @@ filmsExtraListElement.forEach((filmsExtraBlockElement) => {
   const filmsExtraContainerElement = filmsExtraBlockElement.querySelector(`.films-list__container`);
 
   for (let i = 0; i < FILM_EXTRA_COUNT; i++) {
-    render(filmsExtraContainerElement, createFilmCardTemplate(), `beforeend`);
+    render(filmsExtraContainerElement, createFilmCardTemplate(films[i]), `beforeend`);
   }
 });
 
