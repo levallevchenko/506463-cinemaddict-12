@@ -9,9 +9,12 @@ import {createFilmDetailsTemplate} from "./view/film-details.js";
 import {createTopRatedFilmsTemplate} from "./view/top-rated-films.js";
 import {createMostCommentedFilmsTemplate} from "./view/most-commented-films.js";
 import {createStatisticsTemplate} from "./view/statistics.js";
+import {generateFilmCard} from "./mock/film-card.js";
 
-const FILM_COUNT = 5;
+const FILM_COUNT = 12;
 const FILM_EXTRA_COUNT = 2;
+
+const films = new Array(FILM_COUNT).fill().map(generateFilmCard);
 
 const siteHeaderElement = document.querySelector(`.header`);
 
@@ -28,7 +31,7 @@ const filmsListElement = filmsBlockElement.querySelector(`.films-list`);
 const filmsListContainerElement = filmsListElement.querySelector(`.films-list__container`);
 
 for (let i = 0; i < FILM_COUNT; i++) {
-  render(filmsListContainerElement, createFilmCardTemplate(), `beforeend`);
+  render(filmsListContainerElement, createFilmCardTemplate(films[i]), `beforeend`);
 }
 
 render(filmsListElement, createShowMoreButtonTemplate(), `beforeend`);
@@ -51,6 +54,6 @@ filmsExtraListElement.forEach((filmsExtraBlockElement) => {
 });
 
 const siteFooterElement = document.querySelector(`.footer`);
-const filmsStatisticsElement = siteFooterElement.querySelector('.footer__statistics');
+const filmsStatisticsElement = siteFooterElement.querySelector(`.footer__statistics`);
 
 render(filmsStatisticsElement, createStatisticsTemplate(), `beforeend`);
