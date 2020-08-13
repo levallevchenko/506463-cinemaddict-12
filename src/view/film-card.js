@@ -1,8 +1,12 @@
+import {getElementFromArray} from "../util";
+
 export const createFilmCardTemplate = (film) => {
 
-  const {filmPoster, filmTitle, rating, filmCreateYear, filmDuration, genre, description, commentsCount} = film;
+  const {filmPoster, filmTitle, rating, filmCreateYear, filmDuration, genres, description, commentsCount} = film;
 
-  const shortDescription = description.length > 140 ? `${description.slice(0, 139)} …` : description;
+  const shortDescription = description.toString().length > 140 ? `${description.slice(0, 139)} …` : description;
+
+  const genre = getElementFromArray(genres);
 
   return (
     `<article class="film-card">

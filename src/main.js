@@ -8,7 +8,7 @@ import {createShowMoreButtonTemplate} from "./view/show-more-button.js";
 import {createFilmDetailsTemplate} from "./view/film-details.js";
 import {createTopRatedFilmsTemplate} from "./view/top-rated-films.js";
 import {createMostCommentedFilmsTemplate} from "./view/most-commented-films.js";
-import {createStatisticsTemplate} from "./view/statistics.js";
+import {createStatisticsTemplate} from "./view/films-count.js";
 import {generateFilmCard} from "./mock/film-card.js";
 
 const FILM_COUNT = 12;
@@ -30,12 +30,12 @@ const filmsBlockElement = siteMainElement.querySelector(`.films`);
 const filmsListElement = filmsBlockElement.querySelector(`.films-list`);
 const filmsListContainerElement = filmsListElement.querySelector(`.films-list__container`);
 
-for (let i = 0; i < FILM_COUNT; i++) {
+for (let i = 1; i < FILM_COUNT; i++) {
   render(filmsListContainerElement, createFilmCardTemplate(films[i]), `beforeend`);
 }
 
 render(filmsListElement, createShowMoreButtonTemplate(), `beforeend`);
-render(filmsBlockElement, createFilmDetailsTemplate(), `beforeend`);
+render(filmsBlockElement, createFilmDetailsTemplate(films[0]), `beforeend`);
 
 const filmsDetailsElement = filmsBlockElement.querySelector(`.film-details`);
 filmsDetailsElement.style.display = `none`;

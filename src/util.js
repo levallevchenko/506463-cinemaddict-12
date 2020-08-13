@@ -34,4 +34,24 @@ const getFormatTime = (seconds) => {
   return formatTime;
 };
 
-export {render, getRandomInteger, getRandomNumber, getElementFromArray, generateSentenceFromString, getFormatTime};
+const generateRandomArray = (array, minCount, maxCount) => {
+  const count = getRandomInteger(minCount, maxCount);
+  const randomArray = new Array(count).fill().map(() => getElementFromArray(array));
+
+  return randomArray;
+};
+
+const generateTemplate = (array, template) => {
+  return array.map((element) => template(element)).join(``);
+};
+
+// // Генерирует случайную дату в диапозоне
+// const generateRandomDate = (start, end) => {
+//   return new Date(start + Math.random() * (end - start));
+// };
+
+const generateRandomDate = function (start, end) {
+  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+};
+
+export {render, getRandomInteger, getRandomNumber, getElementFromArray, generateSentenceFromString, getFormatTime, generateRandomArray, generateTemplate, generateRandomDate};

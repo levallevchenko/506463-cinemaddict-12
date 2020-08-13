@@ -4,7 +4,10 @@ const filmCreateMinYear = 1900;
 const filmCreateMaxYear = 2020;
 const filmMinDuration = 1200;
 const filmMaxDuration = 14400;
-const commentsMinCount = 0;
-const commentsMaxCount = 200;
+const commentsMinCount = 1;
+const commentsMaxCount = 5;
+const maxDescriptionLength = 140;
 
-export {ratingMinValue, ratingMaxValue, filmCreateMinYear, filmCreateMaxYear, filmMinDuration, filmMaxDuration, commentsMinCount, commentsMaxCount};
+const EMOJIS = [`smile`, `angry`, `puke`, `sleeping`];
+
+export {ratingMinValue, ratingMaxValue, filmCreateMinYear, filmCreateMaxYear, filmMinDuration, filmMaxDuration, commentsMinCount, commentsMaxCount, maxDescriptionLength, EMOJIS};
