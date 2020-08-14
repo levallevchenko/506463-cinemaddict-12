@@ -1,10 +1,11 @@
+import {MAX_DESCRIPTION_LENGTH} from "../const.js";
 import {getElementFromArray, checkActiveElement} from "../util";
 
 export const createFilmCardTemplate = (film) => {
 
   const {filmPoster, filmTitle, rating, filmCreateYear, filmDuration, genres, description, commentsCount, isWatchlist, isWatched, isFavorite} = film;
 
-  const shortDescription = description.toString().length > 140 ? `${description.slice(0, 139)} …` : description;
+  const shortDescription = description.toString().length > MAX_DESCRIPTION_LENGTH ? `${description.slice(0, MAX_DESCRIPTION_LENGTH - 1)} …` : description;
 
   const genre = getElementFromArray(genres);
 

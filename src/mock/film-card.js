@@ -1,5 +1,5 @@
 import {getRandomInteger, getRandomNumber, getElementFromArray, generateSentenceFromString, getFormatTime, generateRandomArray, generateRandomDate} from "../util";
-import {ratingMinValue, ratingMaxValue, filmCreateMinYear, filmCreateMaxYear, filmMinDuration, filmMaxDuration, commentsMinCount, commentsMaxCount, EMOJIS} from "../const.js";
+import {RATING_MIN_VALUE, RATING_MAX_VALUE, FILM_CREATE_MIN_YEAR, FILM_CREATE_MAX_YEAR, FILM_MIN_DURATION, FILM_MAX_DURATION, COMMENTS_MIN_COUNT, COMMENTS_MAX_COUNT, EMOJIS} from "../const.js";
 
 const NAMES_MIN_COUNT = 2;
 const NAMES_MAX_COUNT = 4;
@@ -111,13 +111,13 @@ export const generateFilmCard = () => {
   const filmTitle = getElementFromArray(filmTitles);
   const filmPoster = getElementFromArray(filmPosters);
   const description = generateRandomArray(descriptionArray, 1, 5);
-  const rating = getRandomNumber(ratingMinValue, ratingMaxValue).toFixed(1);
-  const filmCreateYear = getRandomInteger(filmCreateMinYear, filmCreateMaxYear);
+  const rating = getRandomNumber(RATING_MIN_VALUE, RATING_MAX_VALUE).toFixed(1);
+  const filmCreateYear = getRandomInteger(FILM_CREATE_MIN_YEAR, FILM_CREATE_MAX_YEAR);
 
-  const filmDurationInSecond = getRandomInteger(filmMinDuration, filmMaxDuration);
+  const filmDurationInSecond = getRandomInteger(FILM_MIN_DURATION, FILM_MAX_DURATION);
   const filmDuration = getFormatTime(filmDurationInSecond);
   const genres = generateRandomArray(filmGenres, GENRES_MIN_COUNT, GENRES_MAX_COUNT);
-  const commentsCount = getRandomInteger(commentsMinCount, commentsMaxCount);
+  const commentsCount = getRandomInteger(COMMENTS_MIN_COUNT, COMMENTS_MAX_COUNT);
 
   const filmOriginTitle = getElementFromArray(filmOriginTitles);
   const director = getElementFromArray(namesOfDirectors);
