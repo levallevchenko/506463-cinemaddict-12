@@ -77,5 +77,6 @@ render(filmsStatisticsElement, createStatisticsTemplate(), `beforeend`);
 
 render(filmsBlockElement, createFilmDetailsTemplate(films[0]), `beforeend`);
 
-// const filmsDetailsElement = filmsBlockElement.querySelector(`.film-details`);
-// filmsDetailsElement.style.display = `none`;
+// Прячет попап
+const filmsDetailsElement = filmsBlockElement.querySelector(`.film-details`);
+filmsDetailsElement.classList.add(`hidden`);
