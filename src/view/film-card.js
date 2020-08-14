@@ -1,4 +1,4 @@
-import {getElementFromArray} from "../util";
+import {getElementFromArray, checkActiveElement} from "../util";
 
 export const createFilmCardTemplate = (film) => {
 
@@ -8,10 +8,12 @@ export const createFilmCardTemplate = (film) => {
 
   const genre = getElementFromArray(genres);
 
-  const checkActiveElement = (active) => active
-    ? `film-card__controls-item--active`
-    : ``;
-  console.log(checkActiveElement(isWatchlist));
+  const activeClass = `film-card__controls-item--active`;
+
+  const isWatchlistClass = checkActiveElement(isWatchlist, activeClass);
+  const isWatchedClass = checkActiveElement(isWatched, activeClass);
+  const isFavoriteClass = checkActiveElement(isFavorite, activeClass);
+
   return (
     `<article class="film-card">
       <h3 class="film-card__title">${filmTitle}</h3>
@@ -25,9 +27,9 @@ export const createFilmCardTemplate = (film) => {
       <p class="film-card__description">${shortDescription}</p>
       <a class="film-card__comments">${commentsCount} comments</a>
       <form class="film-card__controls">
-        <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist ${checkActiveElement(isWatchlist)}">Add to watchlist</button>
-        <button class="film-card__controls-item button film-card__controls-item--mark-as-watched ${checkActiveElement(isWatched)}">Mark as watched</button>
-        <button class="film-card__controls-item button film-card__controls-item--favorite ${checkActiveElement(isFavorite)}">Mark as favorite</button>
+        <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist ${isWatchlistClass}">Add to watchlist</button>
+        <button class="film-card__controls-item button film-card__controls-item--mark-as-watched ${isWatchedClass}">Mark as watched</button>
+        <button class="film-card__controls-item button film-card__controls-item--favorite ${isFavoriteClass}">Mark as favorite</button>
       </form>
     </article>`
   );

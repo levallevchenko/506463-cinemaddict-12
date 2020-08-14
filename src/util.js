@@ -45,13 +45,14 @@ const generateTemplate = (array, template) => {
   return array.map((element) => template(element)).join(``);
 };
 
-// // Генерирует случайную дату в диапозоне
-// const generateRandomDate = (start, end) => {
-//   return new Date(start + Math.random() * (end - start));
-// };
-
+// Генерирует случайную дату в диапозоне
 const generateRandomDate = function (start, end) {
   return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 };
 
-export {render, getRandomInteger, getRandomNumber, getElementFromArray, generateSentenceFromString, getFormatTime, generateRandomArray, generateTemplate, generateRandomDate};
+const checkActiveElement = (active, activeClass) => active
+  ? activeClass
+  : ``;
+
+
+export {render, getRandomInteger, getRandomNumber, getElementFromArray, generateSentenceFromString, getFormatTime, generateRandomArray, generateTemplate, generateRandomDate, checkActiveElement};
