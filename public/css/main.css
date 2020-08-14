@@ -41,6 +41,10 @@ html {
   overflow: hidden;
 }
 
+.hidden {
+  display: none;
+}
+
 body {
   box-sizing: border-box;
   max-width: 1240px;

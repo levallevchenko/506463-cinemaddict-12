@@ -94,7 +94,7 @@ const randomDate = generateRandomDate(new Date(DATE_OF_FIRST_COMMENT), new Date(
 const generateFilmComment = () => {
   const emoji = getElementFromArray(EMOJIS);
   const comment = generateSentenceFromString(descriptionString);
-  const date = generateRandomDate(new Date(DATE_OF_FIRST_COMMENT), new Date());;
+  const date = generateRandomDate(new Date(DATE_OF_FIRST_COMMENT), new Date());
   const minuteFormat = date.getMinutes() < 10 ? `0` : `` + date.getMinutes();
   const commentDate = `${date.getFullYear()}/${date.getMonth()}/${date.getDate()} ${date.getHours()}:${minuteFormat}`;
   const author = getElementFromArray(names);
