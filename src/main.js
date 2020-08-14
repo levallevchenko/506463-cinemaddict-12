@@ -57,11 +57,6 @@ if (films.length > FILM_COUNT_PER_STEP) {
   });
 }
 
-render(filmsBlockElement, createFilmDetailsTemplate(films[0]), `beforeend`);
-
-const filmsDetailsElement = filmsBlockElement.querySelector(`.film-details`);
-filmsDetailsElement.style.display = `none`;
-
 render(filmsBlockElement, createTopRatedFilmsTemplate(), `beforeend`);
 render(filmsBlockElement, createMostCommentedFilmsTemplate(), `beforeend`);
 
@@ -79,3 +74,8 @@ const siteFooterElement = document.querySelector(`.footer`);
 const filmsStatisticsElement = siteFooterElement.querySelector(`.footer__statistics`);
 
 render(filmsStatisticsElement, createStatisticsTemplate(), `beforeend`);
+
+render(filmsBlockElement, createFilmDetailsTemplate(films[0]), `beforeend`);
+
+// const filmsDetailsElement = filmsBlockElement.querySelector(`.film-details`);
+// filmsDetailsElement.style.display = `none`;
