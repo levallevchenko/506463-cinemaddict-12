@@ -1,5 +1,5 @@
 import {EMOJIS} from "../const.js";
-import {generateTemplate} from "../util";
+import {generateTemplate, checkActiveElement} from "../util";
 
 const createGenresTemplate = (genre) => {
   return `<span class="film-details__genre">${genre}</span>`;
@@ -39,17 +39,11 @@ export const createFilmDetailsTemplate = (film) => {
 
   const releaseDate = date.toLocaleString(`en-GB`, {year: `numeric`, month: `long`, day: `numeric`});
 
-  const watchlistChecked = isWatchlist
-    ? `checked`
-    : ``;
+  const checkedClass = `checked`;
 
-  const watchedChecked = isWatched
-    ? `checked`
-    : ``;
-
-  const favoriteChecked = isFavorite
-    ? `checked`
-    : ``;
+  const isWatchlistChecked = checkActiveElement(isWatchlist, checkedClass);
+  const isWatchedChecked = checkActiveElement(isWatched, checkedClass);
+  const isFavoriteChecked = checkActiveElement(isFavorite, checkedClass);
 
   return (
     `<section class="film-details">
@@ -115,13 +109,13 @@ export const createFilmDetailsTemplate = (film) => {
           </div>
 
           <section class="film-details__controls">
-            <input type="checkbox" class="film-details__control-input visually-hidden" id="watchlist" name="watchlist" ${watchlistChecked}>
+            <input type="checkbox" class="film-details__control-input visually-hidden" id="watchlist" name="watchlist" ${isWatchlistChecked}>
             <label for="watchlist" class="film-details__control-label film-details__control-label--watchlist">Add to watchlist</label>
 
-            <input type="checkbox" class="film-details__control-input visually-hidden" id="watched" name="watched" ${watchedChecked}>
+            <input type="checkbox" class="film-details__control-input visually-hidden" id="watched" name="watched" ${isWatchedChecked}>
             <label for="watched" class="film-details__control-label film-details__control-label--watched">Already watched</label>
 
-            <input type="checkbox" class="film-details__control-input visually-hidden" id="favorite" name="favorite" ${favoriteChecked}>
+            <input type="checkbox" class="film-details__control-input visually-hidden" id="favorite" name="favorite" ${isFavoriteChecked}>
             <label for="favorite" class="film-details__control-label film-details__control-label--favorite">Add to favorites</label>
           </section>
         </div>

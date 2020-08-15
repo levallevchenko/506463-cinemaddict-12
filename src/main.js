@@ -9,14 +9,14 @@ import {createFilmDetailsTemplate} from "./view/film-details.js";
 import {createTopRatedFilmsTemplate} from "./view/top-rated-films.js";
 import {createMostCommentedFilmsTemplate} from "./view/most-commented-films.js";
 import {createStatisticsTemplate} from "./view/films-count.js";
-import {generateFilmCard} from "./mock/film-card.js";
+import {generateFilm} from "./mock/film.js";
 import {generateFilmsFilter} from "./mock/filter.js";
 
 const FILM_COUNT = 12;
 const FILM_COUNT_PER_STEP = 5;
 const FILM_EXTRA_COUNT = 2;
 
-const films = new Array(FILM_COUNT).fill().map(generateFilmCard);
+const films = new Array(FILM_COUNT).fill().map(generateFilm);
 const filters = generateFilmsFilter(films);
 
 const siteHeaderElement = document.querySelector(`.header`);

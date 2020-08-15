@@ -1,5 +1,5 @@
 import {MAX_DESCRIPTION_LENGTH} from "../const.js";
-import {getElementFromArray, checkActiveElement} from "../util";
+import {checkActiveElement} from "../util";
 
 export const createFilmCardTemplate = (film) => {
 
@@ -7,13 +7,13 @@ export const createFilmCardTemplate = (film) => {
 
   const shortDescription = description.toString().length > MAX_DESCRIPTION_LENGTH ? `${description.slice(0, MAX_DESCRIPTION_LENGTH - 1)} …` : description;
 
-  const genre = getElementFromArray(genres);
+  const genre = genres[0];
 
   const activeClass = `film-card__controls-item--active`;
 
-  const isWatchlistClass = checkActiveElement(isWatchlist, activeClass);
-  const isWatchedClass = checkActiveElement(isWatched, activeClass);
-  const isFavoriteClass = checkActiveElement(isFavorite, activeClass);
+  const isWatchlistActive = checkActiveElement(isWatchlist, activeClass);
+  const isWatchedActive = checkActiveElement(isWatched, activeClass);
+  const isFavoriteActive = checkActiveElement(isFavorite, activeClass);
 
   return (
     `<article class="film-card">
@@ -28,9 +28,9 @@ export const createFilmCardTemplate = (film) => {
       <p class="film-card__description">${shortDescription}</p>
       <a class="film-card__comments">${commentsCount} comments</a>
       <form class="film-card__controls">
-        <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist ${isWatchlistClass}">Add to watchlist</button>
-        <button class="film-card__controls-item button film-card__controls-item--mark-as-watched ${isWatchedClass}">Mark as watched</button>
-        <button class="film-card__controls-item button film-card__controls-item--favorite ${isFavoriteClass}">Mark as favorite</button>
+        <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist ${isWatchlistActive}">Add to watchlist</button>
+        <button class="film-card__controls-item button film-card__controls-item--mark-as-watched ${isWatchedActive}">Mark as watched</button>
+        <button class="film-card__controls-item button film-card__controls-item--favorite ${isFavoriteActive}">Mark as favorite</button>
       </form>
     </article>`
   );
