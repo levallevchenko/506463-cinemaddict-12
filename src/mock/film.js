@@ -98,12 +98,12 @@ const ageLimits = [`0+`, `6+`, `12+`, `14+`, `16+`, `18+`];
 
 
 const date = generateRandomDate(new Date(DATE_OF_FIRST_COMMENT), new Date());
-
+const minuteFormat = (date.getMinutes() < 10 ? `0` : ``) + date.getMinutes();
 
 const filmComment = {
   emoji: getElementFromArray(EMOJIS),
   comment: generateSentenceFromString(descriptionString),
-  commentDate: `${date.getFullYear()}/${date.getMonth()}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}`,
+  commentDate: `${date.getFullYear()}/${date.getMonth()}/${date.getDate()} ${date.getHours()}:${minuteFormat}`,
   author: getElementFromArray(names),
 };
 
