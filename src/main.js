@@ -29,17 +29,27 @@ const renderFilm = (filmsContainerElement, filmsBlockElement, film) => {
   const filmDetailsComponent = new FilmDetailsView(film);
 
   const showFilmDetails = () => {
-    filmsBlockElement.append(filmDetailsComponent.getElement());
+    filmsBlockElement.appendChild(filmDetailsComponent.getElement());
   };
 
   const closeFilmDetails = () => {
-    filmDetailsComponent.getElement().remove();
+    filmsBlockElement.removeChild(filmDetailsComponent.getElement());
   };
 
   const onDetailsScreenEscPress = (evt) => onEscPress(evt, closeFilmDetails);
 
   // Открывает попап
   filmCardComponent.getElement().querySelector(`.film-card__poster`).addEventListener(`click`, () => {
+    showFilmDetails();
+    document.addEventListener(`keydown`, onDetailsScreenEscPress);
+  });
+
+  filmCardComponent.getElement().querySelector(`.film-card__title`).addEventListener(`click`, () => {
+    showFilmDetails();
+    document.addEventListener(`keydown`, onDetailsScreenEscPress);
+  });
+
+  filmCardComponent.getElement().querySelector(`.film-card__comments`).addEventListener(`click`, () => {
     showFilmDetails();
     document.addEventListener(`keydown`, onDetailsScreenEscPress);
   });
@@ -102,7 +112,6 @@ filmsExtraListElement.forEach((filmsExtraBlockElement) => {
   }
 });
 
-const siteFooterElement = document.querySelector(`.footer`);
-const filmCountElement = siteFooterElement.querySelector(`.footer__statistics`);
+const filmCountElement = document.querySelector(`.footer__statistics`);
 
 render(filmCountElement, new FilmCountView().getElement(), RenderPosition.BEFOREEND);
