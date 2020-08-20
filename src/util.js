@@ -76,3 +76,11 @@ export const checkActiveElement = (active, activeClass) => active
   ? activeClass
   : ``;
 
+export const onEscPress = (evt, action) => {
+  if (evt.key === `Escape` || evt.key === `Esc`) {
+    evt.preventDefault();
+    action();
+    document.removeEventListener(`keydown`, onEscPress);
+  }
+};
+
