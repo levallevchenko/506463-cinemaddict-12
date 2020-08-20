@@ -1,5 +1,5 @@
 import {EMOJIS} from "../const.js";
-import {generateTemplate, checkActiveElement} from "../util";
+import {generateTemplate, checkActiveElement, createElement} from "../util";
 
 const createGenresTemplate = (genre) => {
   return `<span class="film-details__genre">${genre}</span>`;
@@ -30,7 +30,7 @@ const createEmojiTemplate = (emoji) => {
     </label>`;
 };
 
-export const createFilmDetailsTemplate = (film) => {
+const createFilmDetailsTemplate = (film) => {
   const {filmPoster, filmTitle, rating, filmDuration, genres, description, filmOriginTitle, director, writers, actors, country, ageLimit, isWatchlist, isWatched, isFavorite, comments, date} = film;
 
   const commentTemplate = generateTemplate(comments, createCommentsTemplate);
@@ -145,3 +145,26 @@ export const createFilmDetailsTemplate = (film) => {
     </section>`
   );
 };
+
+export default class FilmDetails {
+  constructor(film) {
+    this._film = film;
+    this._element = null;
+  }
+
+  _getTemplate() {
+    return createFilmDetailsTemplate(this._film);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this._getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

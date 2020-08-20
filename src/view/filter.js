@@ -1,4 +1,6 @@
-export const createFilterItemTemplate = (filters) => {
+import {createElement} from "../util.js";
+
+const createFilterItemTemplate = (filters) => {
 
   const {watchlist, history, favorites} = filters;
 
@@ -14,3 +16,26 @@ export const createFilterItemTemplate = (filters) => {
     </nav>`
   );
 };
+
+export default class Filter {
+  constructor(filters) {
+    this._filters = filters;
+    this._element = null;
+  }
+
+  _getTemplate() {
+    return createFilterItemTemplate(this._filters);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this._getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
