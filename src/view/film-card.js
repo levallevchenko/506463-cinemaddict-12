@@ -1,5 +1,6 @@
 import {MAX_DESCRIPTION_LENGTH} from "../const.js";
-import {checkActiveElement, createElement} from "../util";
+import {checkActiveElement} from "../util.js";
+import AbstractView from "./abstract.js";
 
 const createFilmCardTemplate = (film) => {
 
@@ -36,25 +37,13 @@ const createFilmCardTemplate = (film) => {
   );
 };
 
-export default class FilmCard {
+export default class FilmCard extends AbstractView {
   constructor(film) {
+    super();
     this._film = film;
-    this._element = null;
   }
 
   _getTemplate() {
     return createFilmCardTemplate(this._film);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this._getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

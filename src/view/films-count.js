@@ -1,4 +1,6 @@
-import {getRandomInteger, createElement} from "../util";
+import {getRandomInteger} from "../util";
+import AbstractView from "./abstract.js";
+
 
 const FILMS_MIN_COUNT = 100500;
 const FILMS_MAX_COUNT = 1000500;
@@ -12,25 +14,9 @@ const createFilmCountTemplate = () => {
   );
 };
 
-export default class UserRating {
-  constructor() {
-    this._element = null;
-  }
-
+export default class UserRating extends AbstractView {
   _getTemplate() {
     return createFilmCountTemplate();
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this._getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }
 
