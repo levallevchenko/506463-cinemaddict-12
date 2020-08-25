@@ -37,8 +37,8 @@ const renderFilm = (filmsContainer, film) => {
   };
 
   const closeFilmDetails = () => {
-    filmsBlockComponent.getElement().remove(filmDetailsComponent.getElement());
-    // filmDetailsComponent.getElement().removeChild(new CommentsView(film).getElement());
+    filmsBlockComponent.getElement().removeChild(filmDetailsComponent.getElement());
+    filmDetailsComponent.getElement().removeChild(new CommentsView(film).getElement());
   };
 
   const onDetailsScreenEscPress = (evt) => onEscPress(evt, closeFilmDetails);
