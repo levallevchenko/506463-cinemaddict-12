@@ -37,7 +37,8 @@ const renderFilm = (filmsContainer, film) => {
   };
 
   const closeFilmDetails = () => {
-    filmsBlockComponent.getElement().removeChild(filmDetailsComponent.getElement());
+    filmsBlockComponent.getElement().remove(filmDetailsComponent.getElement());
+    // filmDetailsComponent.getElement().removeChild(new CommentsView(film).getElement());
   };
 
   const onDetailsScreenEscPress = (evt) => onEscPress(evt, closeFilmDetails);
@@ -67,49 +68,51 @@ const renderFilm = (filmsContainer, film) => {
   render(filmsContainer, filmCardElement, RenderPosition.BEFOREEND);
 };
 
+const renderFilmsBlock = (filmsBlockContainer, blockFilms) => {
+  render(filmsBlockContainer, filmsBlockComponent.getElement(), RenderPosition.BEFOREEND);
+
+  for (let i = 0; i < Math.min(blockFilms.length, FILM_COUNT_PER_STEP); i++) {
+    renderFilm(filmsContainerElement, blockFilms[i]);
+  }
+
+  if (blockFilms.length > FILM_COUNT_PER_STEP) {
+    let renderedFilmCount = FILM_COUNT_PER_STEP;
+    const showMoreButtonElement = new ShowMoreButtonView().getElement();
+    render(filmsListElement, showMoreButtonElement, RenderPosition.BEFOREEND);
+
+    showMoreButtonElement.addEventListener(`click`, (evt) => {
+      evt.preventDefault();
+      blockFilms
+        .slice(renderedFilmCount, renderedFilmCount + FILM_COUNT_PER_STEP)
+        .forEach((film) => renderFilm(filmsContainerElement, film));
+
+      renderedFilmCount += FILM_COUNT_PER_STEP;
+
+      if (renderedFilmCount >= blockFilms.length) {
+        showMoreButtonElement.remove();
+      }
+    });
+  }
+
+  render(filmsBlockComponent.getElement(), new TopRatedFilmsView().getElement(), RenderPosition.BEFOREEND);
+  render(filmsBlockComponent.getElement(), new MostCommentedFilmsView().getElement(), RenderPosition.BEFOREEND);
+
+  const filmsExtraListElement = filmsBlockComponent.getElement().querySelectorAll(`.films-list--extra`);
+
+  filmsExtraListElement.forEach((filmsExtraBlockElement) => {
+    const filmsExtraContainerElement = filmsExtraBlockElement.querySelector(`.films-list__container`);
+
+    for (let i = 0; i < FILM_EXTRA_COUNT; i++) {
+      renderFilm(filmsExtraContainerElement, blockFilms[i]);
+    }
+  });
+};
+
 render(siteHeaderElement, new UserRatingView().getElement(), RenderPosition.BEFOREEND);
 render(siteMainElement, new FilterView(filters).getElement(), RenderPosition.BEFOREEND);
 render(siteMainElement, new SortView().getElement(), RenderPosition.BEFOREEND);
 
-render(siteMainElement, filmsBlockComponent.getElement(), RenderPosition.BEFOREEND);
-
-
-for (let i = 0; i < Math.min(films.length, FILM_COUNT_PER_STEP); i++) {
-  renderFilm(filmsContainerElement, films[i]);
-}
-
-if (films.length > FILM_COUNT_PER_STEP) {
-  let renderedFilmCount = FILM_COUNT_PER_STEP;
-  const showMoreButtonElement = new ShowMoreButtonView().getElement();
-  render(filmsListElement, showMoreButtonElement, RenderPosition.BEFOREEND);
-
-  showMoreButtonElement.addEventListener(`click`, (evt) => {
-    evt.preventDefault();
-    films
-      .slice(renderedFilmCount, renderedFilmCount + FILM_COUNT_PER_STEP)
-      .forEach((film) => renderFilm(filmsContainerElement, film));
-
-    renderedFilmCount += FILM_COUNT_PER_STEP;
-
-    if (renderedFilmCount >= films.length) {
-      showMoreButtonElement.remove();
-    }
-  });
-}
-
-render(filmsBlockComponent.getElement(), new TopRatedFilmsView().getElement(), RenderPosition.BEFOREEND);
-render(filmsBlockComponent.getElement(), new MostCommentedFilmsView().getElement(), RenderPosition.BEFOREEND);
-
-const filmsExtraListElement = filmsBlockComponent.getElement().querySelectorAll(`.films-list--extra`);
-
-filmsExtraListElement.forEach((filmsExtraBlockElement) => {
-  const filmsExtraContainerElement = filmsExtraBlockElement.querySelector(`.films-list__container`);
-
-  for (let i = 0; i < FILM_EXTRA_COUNT; i++) {
-    renderFilm(filmsExtraContainerElement, films[i]);
-  }
-});
+renderFilmsBlock(siteMainElement, films);
 
 const filmCountElement = document.querySelector(`.footer__statistics`);
-
 render(filmCountElement, new FilmCountView().getElement(), RenderPosition.BEFOREEND);
