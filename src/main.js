@@ -53,38 +53,19 @@ const renderFilmDetails = (film) => {
 
 const renderFilm = (filmsContainer, film) => {
   const filmCardElement = new FilmCardView(film).getElement();
-  // const filmDetailsComponent = new FilmDetailsView(film);
-
-  // console.log(filmsBlockComponent.getElement().querySelector(`.film-details`));
-
-  // const closeFilmDetails = () => {
-  //   filmsBlockComponent.getElement().removeChild(filmDetailsComponent.getElement());
-  //   filmDetailsComponent.getElement().removeChild(new CommentsView(film).getElement());
-  // };
-
-  // const onDetailsScreenEscPress = (evt) => onEscPress(evt, closeFilmDetails);
 
   // Открывает попап
   filmCardElement.querySelector(`.film-card__poster`).addEventListener(`click`, () => {
     renderFilmDetails(film);
-    // document.addEventListener(`keydown`, onDetailsScreenEscPress);
   });
 
   filmCardElement.querySelector(`.film-card__title`).addEventListener(`click`, () => {
     renderFilmDetails(film);
-    // document.addEventListener(`keydown`, onDetailsScreenEscPress);
   });
 
   filmCardElement.querySelector(`.film-card__comments`).addEventListener(`click`, () => {
     renderFilmDetails(film);
-    // document.addEventListener(`keydown`, onDetailsScreenEscPress);
   });
-
-  // Закрывает попап
-  // filmDetailsComponent.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, () => {
-  //   closeFilmDetails();
-  //   // document.removeEventListener(`keydown`, onDetailsScreenEscPress);
-  // });
 
   render(filmsContainer, filmCardElement, RenderPosition.BEFOREEND);
 };
