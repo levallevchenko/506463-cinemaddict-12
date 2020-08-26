@@ -27,14 +27,10 @@ const filmsBlockComponent = new FilmsBlockView();
 const filmsListElement = filmsBlockComponent.getElement().querySelector(`.films-list`);
 const filmsContainerElement = filmsListElement.querySelector(`.films-list__container`);
 
-const renderFilm = (filmsContainer, film) => {
-  const filmCardElement = new FilmCardView(film).getElement();
+const renderFilmDetails = (film) => {
   const filmDetailsComponent = new FilmDetailsView(film);
-
-  const showFilmDetails = () => {
-    render(filmsBlockComponent.getElement(), filmDetailsComponent.getElement(), RenderPosition.BEFOREEND);
-    render(filmDetailsComponent.getElement(), new CommentsView(film).getElement(), RenderPosition.BEFOREEND);
-  };
+  render(filmsBlockComponent.getElement(), filmDetailsComponent.getElement(), RenderPosition.BEFOREEND);
+  render(filmDetailsComponent.getElement(), new CommentsView(film).getElement(), RenderPosition.BEFOREEND);
 
   const closeFilmDetails = () => {
     filmsBlockComponent.getElement().removeChild(filmDetailsComponent.getElement());
@@ -43,27 +39,52 @@ const renderFilm = (filmsContainer, film) => {
 
   const onDetailsScreenEscPress = (evt) => onEscPress(evt, closeFilmDetails);
 
-  // Открывает попап
-  filmCardElement.querySelector(`.film-card__poster`).addEventListener(`click`, () => {
-    showFilmDetails();
+  if (filmDetailsComponent.getElement()) {
     document.addEventListener(`keydown`, onDetailsScreenEscPress);
-  });
+  } else {
+    document.removeEventListener(`keydown`, onDetailsScreenEscPress);
+  }
 
-  filmCardElement.querySelector(`.film-card__title`).addEventListener(`click`, () => {
-    showFilmDetails();
-    document.addEventListener(`keydown`, onDetailsScreenEscPress);
-  });
-
-  filmCardElement.querySelector(`.film-card__comments`).addEventListener(`click`, () => {
-    showFilmDetails();
-    document.addEventListener(`keydown`, onDetailsScreenEscPress);
-  });
-
-  // Закрывает попап
   filmDetailsComponent.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, () => {
     closeFilmDetails();
     document.removeEventListener(`keydown`, onDetailsScreenEscPress);
   });
+};
+
+const renderFilm = (filmsContainer, film) => {
+  const filmCardElement = new FilmCardView(film).getElement();
+  // const filmDetailsComponent = new FilmDetailsView(film);
+
+  // console.log(filmsBlockComponent.getElement().querySelector(`.film-details`));
+
+  // const closeFilmDetails = () => {
+  //   filmsBlockComponent.getElement().removeChild(filmDetailsComponent.getElement());
+  //   filmDetailsComponent.getElement().removeChild(new CommentsView(film).getElement());
+  // };
+
+  // const onDetailsScreenEscPress = (evt) => onEscPress(evt, closeFilmDetails);
+
+  // Открывает попап
+  filmCardElement.querySelector(`.film-card__poster`).addEventListener(`click`, () => {
+    renderFilmDetails(film);
+    // document.addEventListener(`keydown`, onDetailsScreenEscPress);
+  });
+
+  filmCardElement.querySelector(`.film-card__title`).addEventListener(`click`, () => {
+    renderFilmDetails(film);
+    // document.addEventListener(`keydown`, onDetailsScreenEscPress);
+  });
+
+  filmCardElement.querySelector(`.film-card__comments`).addEventListener(`click`, () => {
+    renderFilmDetails(film);
+    // document.addEventListener(`keydown`, onDetailsScreenEscPress);
+  });
+
+  // Закрывает попап
+  // filmDetailsComponent.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, () => {
+  //   closeFilmDetails();
+  //   // document.removeEventListener(`keydown`, onDetailsScreenEscPress);
+  // });
 
   render(filmsContainer, filmCardElement, RenderPosition.BEFOREEND);
 };
