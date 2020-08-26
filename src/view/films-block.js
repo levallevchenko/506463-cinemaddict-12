@@ -1,13 +1,21 @@
-import {createElement} from "../util.js";
 import AbstractView from "./abstract.js";
 
 const createFilmsBlockTemplate = () => {
   return (
-    `<section class="films"></section>`
+    `<section class="films">
+      <section class="films-list">
+        <h2 class="films-list__title visually-hidden">All movies. Upcoming</h2>
+
+        <div class="films-list__container">
+
+        </div>
+
+      </section>
+    </section>`
   );
 };
 
-export default class FilmsList extends AbstractView {
+export default class FilmsBlock extends AbstractView {
   _getTemplate() {
     return createFilmsBlockTemplate();
   }
