@@ -1,5 +1,5 @@
 import {MAX_DESCRIPTION_LENGTH} from "../const.js";
-import {checkActiveElement} from "../util.js";
+import {checkActiveElement} from "../utils/project.js";
 import AbstractView from "./abstract.js";
 
 const createFilmCardTemplate = (film) => {

@@ -1,4 +1,5 @@
-import {render, RenderPosition, escPressHandler} from "./util.js";
+import {render, RenderPosition} from "./utils/render.js";
+import {escPressHandler} from "./utils/project.js";
 import UserRatingView from "./view/user-rating.js";
 import FilterView from "./view/filter.js";
 import SortView from "./view/films-sort.js";

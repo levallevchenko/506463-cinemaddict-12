@@ -1,4 +1,4 @@
-import {getRandomInteger} from "../util";
+import {getRandomInteger} from "../utils/common.js";
 import AbstractView from "./abstract.js";
 
 

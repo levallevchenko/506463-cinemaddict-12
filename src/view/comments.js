@@ -1,5 +1,5 @@
 import {EMOJIS} from "../const.js";
-import {generateTemplate, createElement} from "../util";
+import {generateTemplate, createElement} from "../utils/render.js";
 
 const createCommentTemplate = (commentElement) => {
   const {emoji, comment, commentDate, author} = commentElement;

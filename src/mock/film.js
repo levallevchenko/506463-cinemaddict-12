@@ -1,4 +1,5 @@
-import {getRandomInteger, getRandomNumber, getElementFromArray, generateSentenceFromString, getFormatTime, generateRandomArray, generateRandomDate} from "../util";
+import {getRandomInteger, getRandomNumber, getElementFromArray, generateSentenceFromString, generateRandomArray, generateRandomDate} from "../utils/common.js";
+import {getFormatTime} from "../utils/project.js";
 import {EMOJIS} from "../const.js";
 
 const NAMES_MIN_COUNT = 2;

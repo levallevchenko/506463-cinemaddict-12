@@ -1,4 +1,5 @@
-import {generateTemplate, checkActiveElement} from "../util";
+import {generateTemplate} from "../utils/render.js";
+import {checkActiveElement} from "../utils/project.js";
 import AbstractView from "./abstract.js";
 
 const createGenresTemplate = (genre) => {
