@@ -1,7 +1,7 @@
 import {MAX_DESCRIPTION_LENGTH} from "../const.js";
-import {checkActiveElement} from "../util";
+import {checkActiveElement, createElement} from "../util";
 
-export const createFilmCardTemplate = (film) => {
+const createFilmCardTemplate = (film) => {
 
   const {filmPoster, filmTitle, rating, filmCreateYear, filmDuration, genres, description, commentsCount, isWatchlist, isWatched, isFavorite} = film;
 
@@ -35,3 +35,26 @@ export const createFilmCardTemplate = (film) => {
     </article>`
   );
 };
+
+export default class FilmCard {
+  constructor(film) {
+    this._film = film;
+    this._element = null;
+  }
+
+  _getTemplate() {
+    return createFilmCardTemplate(this._film);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this._getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
