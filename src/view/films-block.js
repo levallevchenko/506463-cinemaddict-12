@@ -15,6 +15,7 @@ const createFilmsBlockTemplate = () => {
   );
 };
 
+
 export default class FilmsBlock extends AbstractView {
   _getTemplate() {
     return createFilmsBlockTemplate();
