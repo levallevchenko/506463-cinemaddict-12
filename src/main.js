@@ -1,5 +1,6 @@
 import {render, RenderPosition} from "./utils/render.js";
 import {escPressHandler} from "./utils/project.js";
+import {FILM_COUNT} from "./view/film-count.js";
 import UserRatingView from "./view/user-rating.js";
 import FilterView from "./view/filter.js";
 import SortView from "./view/films-sort.js";
@@ -10,11 +11,11 @@ import FilmDetailsView from "./view/film-details.js";
 import CommentsView from "./view/comments.js";
 import TopRatedFilmsView from "./view/top-rated-films.js";
 import MostCommentedFilmsView from "./view/most-commented-films.js";
-import FilmCountView from "./view/films-count.js";
+import FilmCountView from "./view/film-count.js";
+import NoFilmsView from "./view/no-films.js";
 import {generateFilm} from "./mock/film.js";
 import {generateFilmsFilter} from "./mock/filter.js";
 
-const FILM_COUNT = 12;
 const FILM_COUNT_PER_STEP = 5;
 const FILM_EXTRA_COUNT = 2;
 
@@ -114,7 +115,11 @@ render(siteHeaderElement, new UserRatingView().getElement(), RenderPosition.BEFO
 render(siteMainElement, new FilterView(filters).getElement(), RenderPosition.BEFOREEND);
 render(siteMainElement, new SortView().getElement(), RenderPosition.BEFOREEND);
 
-renderFilmsBlock(siteMainElement, films);
+if (FILM_COUNT === 0) {
+  render(siteMainElement, new NoFilmsView().getElement(), RenderPosition.BEFOREEND);
+} else {
+  renderFilmsBlock(siteMainElement, films);
+}
 
 const filmCountElement = document.querySelector(`.footer__statistics`);
 render(filmCountElement, new FilmCountView().getElement(), RenderPosition.BEFOREEND);
