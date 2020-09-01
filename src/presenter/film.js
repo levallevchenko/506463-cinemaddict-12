@@ -6,6 +6,7 @@ import FilmDetailsPresenter from "./film-details.js";
 export default class Film {
   constructor(filmsContainer) {
     this._filmsContainer = filmsContainer;
+    this._filmDetailsPresenter = {};
 
     this._filmComponent = null;
 

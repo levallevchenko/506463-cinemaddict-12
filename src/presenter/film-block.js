@@ -11,6 +11,7 @@ export default class FilmsBlock {
   constructor(filmsBlockContainer) {
     this._filmsBlockContainer = filmsBlockContainer;
     this._renderedFilmCount = FILM_COUNT_PER_STEP;
+    this._filmPresenter = {};
 
     this._filmsBlockComponent = new FilmsBlockView();
     this._showMoreButtonComponent = new ShowMoreButtonView();
@@ -30,7 +31,7 @@ export default class FilmsBlock {
   }
 
   _renderFilm(film) {
-    const filmPresenter = new FilmPresenter(this._filmsBlockComponent);
+    const filmPresenter = new FilmPresenter(this._filmsContainerElement);
     filmPresenter.init(film);
   }
 
