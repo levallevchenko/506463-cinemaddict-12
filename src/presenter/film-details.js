@@ -1,6 +1,6 @@
 import {escPressHandler} from "../utils/project.js";
 import {render, RenderPosition} from "../utils/render.js";
-import FilmsBlockView from "../view/films-block.js";
+import FilmListView from "../view/film-list.js";
 import FilmDetailsView from "../view/film-details.js";
 import CommentsView from "../view/comments.js";
 
@@ -15,7 +15,7 @@ export default class FilmDetails {
 
   init(film) {
     this._film = film;
-    this._filmsBlockComponent = new FilmsBlockView();
+    this._filmListComponent = new FilmListView();
     this._filmDetailsComponent = new FilmDetailsView(film);
     this._commentsViewComponent = new CommentsView(film);
 
@@ -34,7 +34,7 @@ export default class FilmDetails {
     escPressHandler(evt, this._closeFilmDetails);
   }
 
-  _openingListenerHandler() {
+  _openListenerHandler() {
     if (this._filmDetailsComponent) {
       document.addEventListener(`keydown`, this._detailsScreenEscPressHandler);
     } else {

@@ -1,6 +1,6 @@
 import {render, RenderPosition} from "../utils/render.js";
 import FilmView from "../view/film-card.js";
-import FilmsBlockView from "../view/films-block.js";
+import FilmListView from "../view/film-list.js";
 import FilmDetailsPresenter from "./film-details.js";
 
 export default class Film {
@@ -17,7 +17,7 @@ export default class Film {
 
   init(film) {
     this._film = film;
-    this._filmsBlockComponent = new FilmsBlockView();
+    this._filmListComponent = new FilmListView();
     this._filmComponent = new FilmView(film);
 
     this._filmComponent.setFilmPosterClickHandler(this._handlePosterClick);
@@ -28,7 +28,7 @@ export default class Film {
   }
 
   _renderFilmDetails(film) {
-    const filmDetailsPresenter = new FilmDetailsPresenter(this._filmsBlockComponent);
+    const filmDetailsPresenter = new FilmDetailsPresenter(this._filmListComponent);
     filmDetailsPresenter.init(film);
   }
 
