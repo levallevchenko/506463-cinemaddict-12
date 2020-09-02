@@ -1,5 +1,9 @@
-const MAX_DESCRIPTION_LENGTH = 140;
+export const MAX_DESCRIPTION_LENGTH = 140;
 
-const EMOJIS = [`smile`, `angry`, `puke`, `sleeping`];
+export const EMOJIS = [`smile`, `angry`, `puke`, `sleeping`];
 
-export {MAX_DESCRIPTION_LENGTH, EMOJIS};
+export const SortType = {
+  DEFAULT: `default`,
+  DATE: `date`,
+  RATING: `rating`,
+};
