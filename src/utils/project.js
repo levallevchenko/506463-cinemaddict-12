@@ -14,7 +14,7 @@ export const escPressHandler = (evt, action) => {
   if (evt.key === `Escape` || evt.key === `Esc`) {
     evt.preventDefault();
     action();
-    document.removeEventListener(`keydown`, escPressHandler);
+    // document.removeEventListener(`keydown`, escPressHandler);
   }
 };
 

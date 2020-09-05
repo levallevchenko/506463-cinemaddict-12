@@ -1,46 +1,27 @@
 import {render, RenderPosition} from "../utils/render.js";
-import FilmView from "../view/film-card.js";
+import FilmCardView from "../view/film-card.js";
 import FilmListView from "../view/film-list.js";
 import FilmDetailsPresenter from "./film-details.js";
 
-export default class Film {
-  constructor(filmsContainer) {
+export default class FilmCard {
+  constructor(filmsContainer, filmDetailsContainer) {
     this._filmsContainer = filmsContainer;
+    this._filmDetailsContainer = filmDetailsContainer;
     this._filmDetailsPresenter = {};
 
-    this._filmComponent = null;
-
-    this._handlePosterClick = this._handlePosterClick.bind(this);
-    this._handleTitleClick = this._handleTitleClick.bind(this);
-    this._handleCommentsClick = this._handleCommentsClick.bind(this);
+    this._filmCardComponent = null;
   }
 
   init(film) {
     this._film = film;
+    this._filmCardComponent = new FilmCardView(film);
     this._filmListComponent = new FilmListView();
-    this._filmComponent = new FilmView(film);
-
-    this._filmComponent.setFilmPosterClickHandler(this._handlePosterClick);
-    this._filmComponent.setFilmTitleClickHandler(this._handleTitleClick);
-    this._filmComponent.setFilmCommentsClickHandler(this._handleCommentsClick);
-
-    render(this._filmsContainer, this._filmComponent, RenderPosition.BEFOREEND);
+    this._filmCardComponent.setFilmCardClickHandler(() => this._renderFilmDetails(film));
+    render(this._filmsContainer, this._filmCardComponent, RenderPosition.BEFOREEND);
   }
 
   _renderFilmDetails(film) {
-    const filmDetailsPresenter = new FilmDetailsPresenter(this._filmListComponent);
+    const filmDetailsPresenter = new FilmDetailsPresenter(this._filmDetailsContainer);
     filmDetailsPresenter.init(film);
-  }
-
-  _handlePosterClick(film) {
-    this._renderFilmDetails(film);
-  }
-
-  _handleTitleClick(film) {
-    this._renderFilmDetails(film);
-  }
-
-  _handleCommentsClick(film) {
-    this._renderFilmDetails(film);
   }
 }
