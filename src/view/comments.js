@@ -1,5 +1,6 @@
 import {EMOJIS} from "../const.js";
-import {generateTemplate, createElement} from "../util";
+import AbstractView from "../view/abstract.js";
+import {generateTemplate} from "../utils/render.js";
 
 const createCommentTemplate = (commentElement) => {
   const {emoji, comment, commentDate, author} = commentElement;
@@ -56,25 +57,13 @@ const createCommentsListTemplate = (film) => {
     </div>`;
 };
 
-export default class Comments {
+export default class Comments extends AbstractView {
   constructor(film) {
+    super();
     this._film = film;
-    this._element = null;
   }
 
   _getTemplate() {
     return createCommentsListTemplate(this._film);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this._getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

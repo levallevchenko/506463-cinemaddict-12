@@ -1,4 +1,4 @@
-import {createElement} from "../util.js";
+import AbstractView from "./abstract.js";
 
 const createMostCommentedFilmsTemplate = () => {
   return (
@@ -11,24 +11,8 @@ const createMostCommentedFilmsTemplate = () => {
   );
 };
 
-export default class MostCommentedFilms {
-  constructor() {
-    this._element = null;
-  }
-
+export default class MostCommentedFilms extends AbstractView {
   _getTemplate() {
     return createMostCommentedFilmsTemplate();
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this._getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

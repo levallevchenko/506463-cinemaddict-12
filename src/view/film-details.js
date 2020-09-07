@@ -1,4 +1,6 @@
-import {generateTemplate, checkActiveElement, createElement} from "../util";
+import {generateTemplate} from "../utils/render.js";
+import {checkActiveElement} from "../utils/project.js";
+import AbstractView from "./abstract.js";
 
 const createGenresTemplate = (genre) => {
   return `<span class="film-details__genre">${genre}</span>`;
@@ -97,25 +99,25 @@ const createFilmDetailsTemplate = (film) => {
   );
 };
 
-export default class FilmDetails {
+export default class FilmDetails extends AbstractView {
   constructor(film) {
+    super();
     this._film = film;
-    this._element = null;
+
+    this._closeButtonClickHandler = this._closeButtonClickHandler.bind(this);
   }
 
   _getTemplate() {
     return createFilmDetailsTemplate(this._film);
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this._getTemplate());
-    }
-
-    return this._element;
+  _closeButtonClickHandler(evt) {
+    evt.preventDefault();
+    this._callback.click();
   }
 
-  removeElement() {
-    this._element = null;
+  setCloseButtonClickHandler(callback) {
+    this._callback.click = callback;
+    this.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, this._closeButtonClickHandler);
   }
 }
