@@ -116,18 +116,8 @@ export default class FilmDetails extends AbstractView {
     this._callback.click();
   }
 
-  // _escButtonPressHandler(evt) {
-  //   evt.preventDefault();
-  //   this._callback.keydown();
-  // }
-
   setCloseButtonClickHandler(callback) {
     this._callback.click = callback;
     this.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, this._closeButtonClickHandler);
   }
-
-  // setEscButtonPressHandler(callback) {
-  //   this._callback.keydown = callback;
-  //   document.addEventListener(`keydown`, this._escButtonPressHandler);
-  // }
 }

@@ -14,7 +14,6 @@ export default class FilmDetails {
 
     this._handleEscButtonPress = this._handleEscButtonPress.bind(this);
     this._handleCloseButtonClick = this._handleCloseButtonClick.bind(this);
-    this._handleEscButtonPress = this._handleEscButtonPress.bind(this);
   }
 
   init(film) {
