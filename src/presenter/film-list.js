@@ -2,6 +2,7 @@ import {FILM_COUNT} from "../view/film-count.js";
 import {render, RenderPosition, remove} from "../utils/render.js";
 import {sortByDate, sortByRating} from "../utils/project.js";
 import {SortType} from "../const.js";
+import {updateItem} from "../utils/common.js";
 import SortView from "../view/films-sort.js";
 import NoFilmsView from "../view/no-films.js";
 import FilmListView from "../view/film-list.js";
@@ -27,6 +28,7 @@ export default class FilmList {
     this._topRatedFilmsComponent = new TopRatedFilmsView();
     this._MostCommentedFilmsComponent = new MostCommentedFilmsView();
 
+    this._handleFilmChange = this._handleFilmChange.bind(this);
     this._handleSortTypeChange = this._handleSortTypeChange.bind(this);
 
     this._filmsList = this._filmListComponent.getElement().querySelector(`.films-list`);
@@ -40,6 +42,12 @@ export default class FilmList {
 
     render(this._filmListContainer, this._filmListComponent, RenderPosition.BEFOREEND);
     this._renderAllFilms();
+  }
+
+  _handleFilmChange(updatedFilm) {
+    this._films = updateItem(this._films, updatedFilm);
+    this._sourcedFilms = updateItem(this._sourcedFilms, updatedFilm);
+    this._filmCardPresenter[updatedFilm.id].init(updatedFilm);
   }
 
   _sortFilmCards(sortType) {
