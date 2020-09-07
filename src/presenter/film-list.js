@@ -83,7 +83,7 @@ export default class FilmList {
   }
 
   _handleShowMoreButtonClick() {
-    this._renderFilms(this._filmsContainer, this._renderedFilmCount, this._renderedFilmCount + FILM_COUNT_PER_STEP);
+    this._renderFilms(this._filmsContainer, this._filmListComponent, this._renderedFilmCount, this._renderedFilmCount + FILM_COUNT_PER_STEP);
     this._renderedFilmCount += FILM_COUNT_PER_STEP;
 
     if (this._renderedFilmCount >= this._films.length) {

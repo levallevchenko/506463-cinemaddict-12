@@ -1,5 +1,5 @@
 import {escPressHandler} from "../utils/project.js";
-import {render, RenderPosition, remove} from "../utils/render.js";
+import {render, RenderPosition, remove, replace} from "../utils/render.js";
 import FilmDetailsView from "../view/film-details.js";
 import CommentsView from "../view/comments.js";
 
@@ -18,10 +18,22 @@ export default class FilmDetails {
 
   init(film) {
     this._film = film;
+    const prevFilmDetailsComponent = this._filmDetailsComponent;
+
     this._filmDetailsComponent = new FilmDetailsView(film);
     this._commentsComponent = new CommentsView(film);
 
-    this._openFilmDetails();
+    if (prevFilmDetailsComponent === null) {
+      this._openFilmDetails();
+      return;
+    }
+
+    if (this._filmDetailsContainer.getElement().contains(prevFilmDetailsComponent.getElement())) {
+      replace(this._filmDetailsComponent, prevFilmDetailsComponent);
+      this._openFilmDetails();
+    }
+
+    remove(prevFilmDetailsComponent);
   }
 
   _openFilmDetails() {
@@ -32,9 +44,13 @@ export default class FilmDetails {
     render(this._filmDetailsComponent, this._commentsComponent, RenderPosition.BEFOREEND);
   }
 
-  _closeFilmDetails() {
+  destroy() {
     remove(this._filmDetailsComponent);
-    document.removeEventListener(`keydown`, this._handleEscButtonPress);
+    document.removeEventListener(`keydown`, this._escKeyDownHandler);
+  }
+
+  _closeFilmDetails() {
+    this.destroy();
   }
 
   _handleEscButtonPress(evt) {

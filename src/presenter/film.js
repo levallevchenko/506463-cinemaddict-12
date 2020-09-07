@@ -28,8 +28,6 @@ export default class FilmCard {
       replace(this._filmCardComponent, prevFilmCardComponent);
     }
 
-    console.log(this._filmsContainer.getElement());
-
     remove(prevFilmCardComponent);
   }
 
