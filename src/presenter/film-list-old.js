@@ -1,4 +1,5 @@
 import {FILM_COUNT} from "../view/film-count.js";
+import {escPressHandler} from "../utils/project.js";
 import {render, RenderPosition, remove} from "../utils/render.js";
 import {sortByDate, sortByRating} from "../utils/project.js";
 import {SortType} from "../const.js";
@@ -6,11 +7,11 @@ import SortView from "../view/films-sort.js";
 import NoFilmsView from "../view/no-films.js";
 import FilmListView from "../view/film-list.js";
 import FilmCardView from "../view/film-card.js";
-// import FilmDetailsView from "../view/film-details.js";
+import FilmDetailsView from "../view/film-details.js";
+import CommentsView from "../view/comments.js";
 import ShowMoreButtonView from "../view/show-more-button.js";
 import TopRatedFilmsView from "../view/top-rated-films.js";
 import MostCommentedFilmsView from "../view/most-commented-films.js";
-import FilmDetailsPresenter from "./film-details.js";
 
 const FILM_COUNT_PER_STEP = 5;
 const FILM_EXTRA_COUNT = 2;
@@ -85,30 +86,25 @@ export default class FilmList {
   }
 
   _renderFilmDetails(film) {
-    const filmDetailsPresenter = new FilmDetailsPresenter(this._filmListComponent);
-    filmDetailsPresenter.init(film);
+    this._filmDetailsComponent = new FilmDetailsView(film);
+    this._commentsComponent = new CommentsView(film);
+
+    this._closeFilmDetails = () => remove(this._filmDetailsComponent);
+
+    this._handleCloseButtonClick = () => this._closeFilmDetails();
+    this._filmDetailsComponent.setCloseButtonClickHandler(this._handleCloseButtonClick);
+
+    this._detailsScreenEscPressHandler = (evt) => escPressHandler(evt, this._closeFilmDetails);
+
+    if (this._filmDetailsComponent) {
+      document.addEventListener(`keydown`, this._detailsScreenEscPressHandler);
+    } else {
+      document.removeEventListener(`keydown`, this._detailsScreenEscPressHandler);
+    }
+
+    render(this._filmListContainer, this._filmDetailsComponent, RenderPosition.BEFOREEND);
+    render(this._filmDetailsComponent, this._commentsComponent, RenderPosition.BEFOREEND);
   }
-
-  // _renderFilmDetails(film) {
-  //   this._filmDetailsComponent = new FilmDetailsView(film);
-  //   this._commentsComponent = new CommentsView(film);
-
-  //   this._closeFilmDetails = () => remove(this._filmDetailsComponent);
-
-  //   this._handleCloseButtonClick = () => this._closeFilmDetails();
-  //   this._filmDetailsComponent.setCloseButtonClickHandler(this._handleCloseButtonClick);
-
-  //   this._detailsScreenEscPressHandler = (evt) => escPressHandler(evt, this._closeFilmDetails);
-
-  //   if (this._filmDetailsComponent) {
-  //     document.addEventListener(`keydown`, this._detailsScreenEscPressHandler);
-  //   } else {
-  //     document.removeEventListener(`keydown`, this._detailsScreenEscPressHandler);
-  //   }
-
-  //   render(this._filmListContainer, this._filmDetailsComponent, RenderPosition.BEFOREEND);
-  //   render(this._filmDetailsComponent, this._commentsComponent, RenderPosition.BEFOREEND);
-  // }
 
   _handleShowMoreButtonClick() {
     this._renderFilms(this._filmsContainer, this._renderedFilmCount, this._renderedFilmCount + FILM_COUNT_PER_STEP);
