@@ -23,11 +23,16 @@ export default class Sort extends AbstractView {
   }
 
   _sortTypeChangeHandler(evt) {
+    const sortButtons = this.getElement().querySelectorAll(`.sort__button`);
+
     if (evt.target.tagName !== `A`) {
       return;
     }
 
     evt.preventDefault();
+    sortButtons.forEach((button) => button.classList.remove(`sort__button--active`));
+    evt.target.classList.add(`sort__button--active`);
+
     this._callback.sortTypeChange(evt.target.dataset.sortType);
   }
 
